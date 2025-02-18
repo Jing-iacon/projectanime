@@ -1,14 +1,30 @@
-import { getAnimeFeature } from "../../api/queries/getAnimeFeature";
+import { getAnimeTop } from "../../api/queries/getAnimeTop";
+import { getAnimeSeasonUpcoming } from "../../api/queries/getAnimeSeasonUpcoming";
+import { getAnimeRecommend } from "../../api/queries/getAnimeRecommend";
+import type { AnimeTop } from "../../api/types/AnimeTop";
+import type { AnimeSeasonUpcoming } from "../../api/types/AnimeSeasonUpcoming";
+import type { AnimeRecommend } from "../../api/types/AnimeRecommend";
 
 
+export interface AnimeFeatureLoader {
+  topAnime:  AnimeTop[]
+}
+export interface AnimeSeasonUpcomingLoader{
+  animeSeasonUpcoming: AnimeSeasonUpcoming[]
+}
+export interface AnimeRecommendLoader{
+  animeRecommend: AnimeRecommend[]
+}
 
 export async function homeLoader() {
   // จะมี Obj เข้ามาใน loader เเล้วจะมี props ที่ขื่อ Request ดึงตัวนี้ออกมา
 
-  const topAnime = await getAnimeFeature(); // ดึง getAnimeFeature มาใช้หรือเรียก api นั่นล่ะ
-  
+  const topAnime = await getAnimeTop(); 
+  const animeSeasonUpcoming = await getAnimeSeasonUpcoming();
+  const animeRecommend = await getAnimeRecommend();
   return {
     topAnime,
-    // seasonAnime,
+    animeSeasonUpcoming,
+    animeRecommend
   };
 }
