@@ -6,17 +6,13 @@ import type { AnimeSeasonUpcoming } from "../../api/types/AnimeSeasonUpcoming";
 import type { AnimeRecommend } from "../../api/types/AnimeRecommend";
 
 
-export interface AnimeFeatureLoader {
-  topAnime:  AnimeTop[]
-}
-export interface AnimeSeasonUpcomingLoader{
-  animeSeasonUpcoming: AnimeSeasonUpcoming[]
-}
-export interface AnimeRecommendLoader{
-  animeRecommend: AnimeRecommend[]
+export interface AnimeLoaderResult {
+  topAnime:  AnimeTop[];
+  animeSeasonUpcoming: AnimeSeasonUpcoming[];
+  animeRecommend: AnimeRecommend;
 }
 
-export async function homeLoader() {
+export async function homeLoader(): Promise<AnimeLoaderResult> {
   // จะมี Obj เข้ามาใน loader เเล้วจะมี props ที่ขื่อ Request ดึงตัวนี้ออกมา
 
   const topAnime = await getAnimeTop(); 
