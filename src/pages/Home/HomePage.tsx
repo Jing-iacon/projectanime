@@ -12,7 +12,7 @@ export default function HomePage() {
             Home Page
             {topAnime.map(e => <div>{e.mal_id}</div>)}
             Hello
-            {animeRecommend.data.map(e => <div>{e.mal_id}</div>)}
+            {animeRecommend.map(e => <div>{e.mal_id}</div>)}
         </div>
     )
 }

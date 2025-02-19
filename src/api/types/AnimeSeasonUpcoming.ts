@@ -1,6 +1,4 @@
 export interface AnimeSeasonUpcoming {
-    data: [
-        {
             mal_id: number;
             url: string;
             images: {
@@ -45,8 +43,6 @@ export interface AnimeSeasonUpcoming {
             themes: Genre[];
             demographics: Genre[];
         }
-    ]
-}
 interface ImageFormats {
     image_url: string;
     small_image_url: string;

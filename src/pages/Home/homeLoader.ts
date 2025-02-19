@@ -9,7 +9,7 @@ import type { AnimeRecommend } from "../../api/types/AnimeRecommend";
 export interface AnimeLoaderResult {
   topAnime:  AnimeTop[];
   animeSeasonUpcoming: AnimeSeasonUpcoming[];
-  animeRecommend: AnimeRecommend;
+  animeRecommend: AnimeRecommend[];
 }
 
 export async function homeLoader(): Promise<AnimeLoaderResult> {

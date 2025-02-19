@@ -1,6 +1,5 @@
 export interface AnimeRecommend {
-  data: {
-    mal_id: number;
+    mal_id: string;
     entry: {
       mal_id: string;
       url: string;
@@ -23,5 +22,5 @@ export interface AnimeRecommend {
       url: string;
       username: string;
     };
-  }[];
-}
+  }
+
