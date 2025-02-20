@@ -17,7 +17,7 @@ export default function HomePage() {
             Home Page
             {renderTop}
             Hello
-            {Recommend.map(e => <div>{e.mal_id}</div>)}
+            {/* {Recommend.map(e => <div>{e.mal_id}</div>)} */}
         </div>
     )
 }

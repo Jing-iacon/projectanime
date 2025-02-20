@@ -21,6 +21,6 @@ export async function detailsLoader({params}: detailsLoaderArgs): Promise<Detail
     console.log(details);
     
     return {
-        details,
+        details
     }
 }
