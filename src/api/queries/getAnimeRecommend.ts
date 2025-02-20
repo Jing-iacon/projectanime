@@ -10,5 +10,5 @@ export async function getAnimeRecommend(): Promise<AnimeRecommend[]> {
   );
   const data: RecommendResponse = await Recommend.json();
 
-  return data.data
+  return data.data 
 }

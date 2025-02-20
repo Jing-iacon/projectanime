@@ -30,7 +30,7 @@ export interface AnimeDetails {
     synopsis?: string;
     genres?: Genre[];
   };
-}
+}[]
 
 interface Genre {
   name: string;

@@ -22,6 +22,4 @@ export async function searchLoader({request} : {request: Request }): Promise<Sea
             searchResult: result, // เหตุผลในการสร้าง interface SearchLoaderResult
         };
         }
-
-
  // search loader ดึงข้อมูล จาก searchResults มาอีกที     

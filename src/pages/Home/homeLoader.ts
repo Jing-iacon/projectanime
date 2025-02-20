@@ -7,20 +7,20 @@ import type { AnimeRecommend } from "../../api/types/AnimeRecommend";
 
 
 export interface AnimeLoaderResult {
-  topAnime:  AnimeTop[];
-  animeSeasonUpcoming: AnimeSeasonUpcoming[];
-  animeRecommend: AnimeRecommend[];
+  top:  AnimeTop[];
+  Upcoming: AnimeSeasonUpcoming[];
+  Recommend: AnimeRecommend[];
 }
 
 export async function homeLoader(): Promise<AnimeLoaderResult> {
   // จะมี Obj เข้ามาใน loader เเล้วจะมี props ที่ขื่อ Request ดึงตัวนี้ออกมา
 
-  const topAnime = await getAnimeTop(); 
-  const animeSeasonUpcoming = await getAnimeSeasonUpcoming();
-  const animeRecommend = await getAnimeRecommend();
+  const top = await getAnimeTop(); 
+  const Upcoming = await getAnimeSeasonUpcoming();
+  const Recommend = await getAnimeRecommend();
   return {
-    topAnime,
-    animeSeasonUpcoming,
-    animeRecommend
+    top,
+    Upcoming,
+    Recommend
   };
 }

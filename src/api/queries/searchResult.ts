@@ -31,16 +31,18 @@ export async function searchResult(term: string): Promise<AnimeResult[]> {  // t
     const res = await fetch(`https://api.jikan.moe/v4/anime?q=${term}`) // ตัวที่เรียกใช้ searchResult ต้องส่ง term มาให้ด้วยจึงใส่ term ใน searchResult
     const data: SearchResponse = await res.json();
 
-    return data.data.map(({mal_id, url, images, title,  type, duration,  synopsis, genres}) => { // searchResult คือ data ที่อยู่ใน array แต่ละตัว // Destructuring โดยการเอา props ออกมา 
-        return { // เนื่องจากที่ชื่อใช้ชื่อเดียวกับ props จึงใช้รูปแบบด้านล่างได้เลย
-            mal_id,
-            url,
-            images,
-            title,
-            type,
-            duration,
-            synopsis,
-            genres,
-        }
-    });  // ใช้ map เพราะว่า data เป็นรูปแบบ array
+    return data.data 
 }
+
+//.map(({mal_id, url, images, title,  type, duration,  synopsis, genres}) => { // searchResult คือ data ที่อยู่ใน array แต่ละตัว // Destructuring โดยการเอา props ออกมา 
+// return { // เนื่องจากที่ชื่อใช้ชื่อเดียวกับ props จึงใช้รูปแบบด้านล่างได้เลย
+//     mal_id,
+//     url,
+//     images,
+//     title,
+//     type,
+//     duration,
+//     synopsis,
+//     genres,
+// }
+// });  // ใช้ map เพราะว่า data เป็นรูปแบบ array
