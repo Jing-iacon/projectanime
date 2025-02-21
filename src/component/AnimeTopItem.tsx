@@ -7,30 +7,49 @@ interface TopProps {
 export default function AnimeTopItem({ top }: TopProps) {
   //รับตัวแปรเป็นค่า top เเล้ว top ที่ได้ออกมาเป็น top: AnimeTop จึงใช้ destructuring {top} ออกมา ทำให้ไม่ต้อง ใช้ top.top.xxx
   return (
-<div className="m-8 max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-full border border-amber-600">
-  <div className="md:flex border border-red-600">
-    <div className="p-5">
-      <div className="border border-red-600 text-l font-semibold tracking-wide text-yellow-400 uppercase mb-3">#{top.rank} spotlight</div>
-      <a href="#" className="border border-red-600 mt-1 block text-4xl leading-tight font-medium text-black hover:underline">
-        {top.title}
-      </a>
-      <p className="border border-red-600 mt-2 text-gray-500 text-xl line-clamp-3 h-auto flex-grow">
-       {top.synopsis}
-      </p>
-      <button className="bg-gray-600 h-[35px] w-[70px] rounded-2xl text-white mt-3 md:text-center" >Detail</button>
-    </div>
-    <div className="border border-red-600 md:shrink-0">
-      <img
-        className="h-48 w-full object-cover md:h-full md:w-48 max-w-none"
-        src={top.images.webp.large_image_url}
-        alt=""
-      />
+    <div className="m-6 h-auto flex justify-center bg-white">
+    <div className="w-4/5 flex pt-4 rounded-2xl shadow-2xl bg-gray-400 m-10">
+      <div className="w-full flex justify-between rounded-lg p-6 text-white items-stretch">
+        
+        {/* ฝั่งซ้าย: Trailer + ข้อมูล */}
+        <div className="w-3/5 flex flex-col px-4 gap-6">
+          
+          {/* ตรวจสอบว่ามีวิดีโอหรือไม่ */}
+          <div className="w-full rounded-lg overflow-hidden shadow-md flex">
+            {top.trailer?.embed_url ? (
+              <iframe className="w-full aspect-video rounded-lg" src={top.trailer.embed_url}></iframe>
+            ) : (
+              <div className="w-full aspect-video flex items-center justify-center bg-gray-700 text-gray-300 rounded-lg shadow-md">
+                No Trailer Available
+              </div>
+            )}
+          </div>
+  
+          {/* Container สำหรับข้อความและปุ่ม */}
+          <div className="w-full ">
+            <div className="text-yellow-400 text-lg">#{top.rank} spotlight</div>
+            <div className="text-4xl font-semibold">{top.title}</div>
+            <div className="line-clamp-3 mt-3 text-lg">{top.synopsis}</div>
+            <button className="mt-4 h-[45px] w-[130px] rounded-3xl bg-gray-500 text-white hover:bg-white hover:text-gray-900 shadow-md">
+              Detail
+            </button>
+          </div>
+        </div>
+  
+        {/* ฝั่งขวา: รูปภาพที่สูงเท่า Iframe จริงๆ */}
+        <div 
+          className="w-[400px] bg-cover bg-center bg-no-repeat rounded-lg shadow-md flex-1 min-h-[225px]" 
+          style={{ backgroundImage: `url(${top.images.webp.large_image_url})` }}
+        />
+        
+      </div>
     </div>
   </div>
-</div>
+  
 
- )
+  );
 }
-    
-{/*  */}
- 
+
+{
+  /*  */
+}

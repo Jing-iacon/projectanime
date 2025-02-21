@@ -13,10 +13,10 @@ export default function HomePage() {
     })
   
     return (
-        <div>
-            Home Page
+        <div className="bg-white">
+ 
             {renderTop}
-            Hello
+
             {/* {Recommend.map(e => <div>{e.mal_id}</div>)} */}
         </div>
     )
