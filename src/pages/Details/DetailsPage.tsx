@@ -8,6 +8,6 @@ export default function DetailsPage() {
     console.log(details);
 
     return (
-        <AnimeDetailsItem details={details} key={details.data.title}/>
+        <AnimeDetailsItem details={details} key={details?.mal_id}/>
     )
 }

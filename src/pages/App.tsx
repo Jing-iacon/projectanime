@@ -2,12 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Root from "./Root"
 import HomePage from "./Home/HomePage"
 import DetailsPage from "./Details/DetailsPage"
-import MyFavoritePage from "./MyFavoritePage"
+import MyFavoritePage from "./MyFavorite/MyFavoritePage"
 import SearchPage from "./Search/SearchPage"
 import './index.css'
 import { searchLoader } from "./Search/searchLoader"
 import { detailsLoader } from "./Details/detailsLoader"
 import { homeLoader } from "./Home/homeLoader"
+
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/myfavorite",
-        element: <MyFavoritePage />
+        element: <MyFavoritePage />,
       },
       {
         path: "/details/:id",

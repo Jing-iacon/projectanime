@@ -2,25 +2,48 @@ import { Link } from "react-router-dom";
 import type { AnimeResult } from "../api/types/AnimeResult";
 
 interface AnimeListItemProps {
-    result: AnimeResult;
+  result: AnimeResult;
 }
 
 export default function AnimeListItem({ result }: AnimeListItemProps) {
-    return (
-        <div className="group relative">
-            <Link to={`/details/${result.mal_id}`}>
-                <img src={result.images.jpg?.large_image_url} alt="No Image Available" className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80" />
-            </Link>
-            <Link to={`/details/${result.mal_id}`} className="mt-4 flex justify-between">
-                <div>
-                    <h3 className="text-sm text-gray-700">
-                        <span aria-hidden="true" className="absolute inset-0"></span>
-                        {result.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">{result.type}</p>
-                </div>
-
-            </Link>
+  return (
+    <div className="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 w-fullflex flex-col ">
+      <Link to={`/details/${result.mal_id}`}>
+        <div className="w-full overflow-hidden rounded-t-lg">
+          <img
+            src={result.images.webp?.large_image_url}
+            alt="No Image Available"
+            className="p-4 w-[320px] h-[380px]  bg-gray-800 group-hover:opacity-75 transition-opacity duration-300"
+          />
         </div>
-    )
+      </Link>
+
+      <div className="p-4 flex flex-col flex-grow justify-between">
+        <div>
+          <Link to={`/details/${result.mal_id}`}>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-1">
+              {result.title}
+            </h3>
+          </Link>
+          <p className="mt-2 text-sm text-gray-700 dark:text-gray-400">
+            {result.type}
+          </p>
+        </div>
+        <div className="flex gap-3">
+          <Link
+            to={`/details/${result.mal_id}`}
+            className="w-[110px] mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-400 dark:hover:bg-blue-300 dark:focus:ring-blue-800"
+          >
+            Read more
+          </Link>
+          <Link
+            to={`/myfavorite/${result.mal_id}`}
+            className="w-[140px] mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-400 dark:hover:bg-blue-300 dark:focus:ring-blue-800"
+          >
+            Add Favorite
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }

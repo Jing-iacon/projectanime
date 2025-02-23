@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/pages/main.tsx", "src/pages/App.tsx", "src/pages/Details/DetailsPage.tsx", "src/pages/Home/HomePage.tsx", "src/pages/MyFavoritePage.tsx", "src/pages/Root.tsx", "vite-env.d.ts"]
+  "include": ["src", "src/pages/main.tsx", "src/pages/App.tsx", "src/pages/Details/DetailsPage.tsx", "src/pages/Home/HomePage.tsx", "src/pages/MyFavorite/MyFavoritePage.tsx", "src/pages/Root.tsx", "vite-env.d.ts"]
 }

@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom"
 import { AnimeLoaderResult } from "./homeLoader";
 import AnimeTopItem from "../../component/AnimeTopItem";
+import AnimeSeasonUpcoming from "../../component/AnimeSeasonUpcoming";
 export default function HomePage() {
 
     const {top,Upcoming,Recommend} = useLoaderData() as AnimeLoaderResult;
@@ -11,13 +12,20 @@ export default function HomePage() {
     const renderTop = top.map((top) => {
         return <AnimeTopItem top={top} key={top.title}/>
     })
+
+    const renderUpcoming = Upcoming.map((Upcoming => {
+        return <AnimeSeasonUpcoming upcoming={Upcoming} key={Upcoming.title} />
+    }))
   
     return (
-        <div className="bg-white">
+        <>
+        <div className="bg-[#282828]">
  
             {renderTop}
 
-            {/* {Recommend.map(e => <div>{e.mal_id}</div>)} */}
+            {renderUpcoming}
         </div>
+        <div></div>
+        </>
     )
 }
