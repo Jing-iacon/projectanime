@@ -1,26 +1,26 @@
 import { getAnimeTop } from "../../api/queries/getAnimeTop";
 import { getAnimeSeasonUpcoming } from "../../api/queries/getAnimeSeasonUpcoming";
-import { getAnimeRecommend } from "../../api/queries/getAnimeRecommend";
+import { getAnimeSeasonNow } from "../../api/queries/getAnimeSeaseonNow";
 import type { AnimeTop } from "../../api/types/AnimeTop";
 import type { AnimeSeasonUpcoming } from "../../api/types/AnimeSeasonUpcoming";
-import type { AnimeRecommend } from "../../api/types/AnimeRecommend";
+import type { AnimeSeasonNow } from "../../api/types/AnimeSeasonNow";
 
 
 export interface AnimeLoaderResult {
   top:  AnimeTop[];
-  Upcoming: AnimeSeasonUpcoming[];
-  Recommend: AnimeRecommend[];
+  upcoming: AnimeSeasonUpcoming[];
+  now: AnimeSeasonNow;
 }
 
 export async function homeLoader(): Promise<AnimeLoaderResult> {
   // จะมี Obj เข้ามาใน loader เเล้วจะมี props ที่ขื่อ Request ดึงตัวนี้ออกมา
 
   const top = await getAnimeTop(); 
-  const Upcoming = await getAnimeSeasonUpcoming();
-  const Recommend = await getAnimeRecommend();
+  const upcoming = await getAnimeSeasonUpcoming();
+  const now = await getAnimeSeasonNow();
   return {
     top,
-    Upcoming,
-    Recommend
+    upcoming,
+    now
   };
 }

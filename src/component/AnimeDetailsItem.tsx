@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import type { AnimeDetails } from "../api/types/AnimeDetail";
 
 interface AnimeDetailsItemProps {
@@ -23,8 +24,8 @@ export default function AnimeDetailsItem({
   }
 }: AnimeDetailsItemProps) {
   return (
-    <div className="bg bg-black">
-    <div className="bg-[#282828] text-white min-h-screen p-6 ">
+    <div className="bg-gray-900">
+    <div className="bg-gray-900 text-white min-h-screen p-6 ">
       <div className=" max-w-5xl mx-auto flex flex-col md:flex-row gap-6 ">
         {/* Anime Poster */}
         <div className="w-full md:w-1/4">
@@ -50,16 +51,18 @@ export default function AnimeDetailsItem({
           <p className="mt-4 text-gray-300 text-justify">{synopsis}</p>
 
           <div className="flex gap-4 mt-4">
+            <Link to="/myfavorite">
             <button className="px-6 py-2 rounded-lg bg-sky-500 hover:bg-sky-700">
               + Add to List
             </button>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Anime Info */}
       <div className="max-w-5xl mx-auto mt-8">
-        <div className="bg-[#3c3c3c] p-4 rounded-lg">
+        <div className="dark:bg-gray-800 dark:border-gray-700 p-4 rounded-lg">
           <p>
             <span className="font-bold">Japanese:</span> {title_japanese}{" "}
           </p>
