@@ -10,17 +10,17 @@ export default function HomePage() {
   console.log("animeNow", now);
 
   const renderTop = top.map((top) => {
-    return <AnimeTopItem top={top} key={top.title} />;
+    return <AnimeTopItem top={top} key={top.mal_id} />;
   });
 
   const renderUpcoming = upcoming.map((upcoming) => {
-    return <AnimeSeasonUpcoming upcoming={upcoming} key={upcoming.title} />;
+    return <AnimeSeasonUpcoming upcoming={upcoming} key={upcoming.mal_id} />;
   });
 
   const renderNow = now.data.map((now) => (
     <AnimeSeasonNow now={now} key={now.mal_id} />
   ));
-
+  
   return (
     <div>
       <h2 className="text-2xl font-bold tracking-tight text-white">Top Anime</h2>
