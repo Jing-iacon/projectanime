@@ -3,6 +3,8 @@ import { AnimeLoaderResult } from "./homeLoader";
 import AnimeTopItem from "../../component/AnimeTopItem";
 import AnimeSeasonUpcoming from "../../component/AnimeSeasonUpcoming";
 import AnimeSeasonNow from "../../component/AnimeSeasonNow";
+import Carousel from "../../component/Carousel";
+import Slider from "../../component/Slider";
 export default function HomePage() {
   const { top, upcoming, now } = useLoaderData() as AnimeLoaderResult;
   console.log("topAnime", top);
@@ -10,7 +12,7 @@ export default function HomePage() {
   console.log("animeNow", now);
 
   const renderTop = top.map((top) => {
-    return <AnimeTopItem top={top} key={top.mal_id} />;
+    return <AnimeTopItem top={top} mode={2} key={top.mal_id} />;
   });
 
   const renderUpcoming = upcoming.map((upcoming) => {
@@ -20,13 +22,32 @@ export default function HomePage() {
   const renderNow = now.data.map((now) => (
     <AnimeSeasonNow now={now} key={now.mal_id} />
   ));
-  
+
   return (
     <div>
-      <h2 className="text-2xl font-bold tracking-tight text-white">Top Anime</h2>
-      <div className="bg-gray-900">{renderTop}</div>
-      <h2 className="text-2xl font-bold tracking-tight text-white">Anime Season Upcoming</h2>
-      <div className="bg-gray-900 flex">{renderUpcoming}</div>
+      <hr />
+      <Carousel
+        autoPlayInterval={3000}
+        items={top.map((e) => (
+          <AnimeTopItem top={e} mode={1} key={e.mal_id} />
+        ))}
+      />
+      <hr />
+      <h2 className="text-2xl font-bold tracking-tight text-white">
+        Top Anime
+      </h2>
+      {/* <div className="bg-gray-900">{renderTop}</div> */}
+      <h2 className="text-2xl font-bold tracking-tight text-white">
+        Anime Season Upcoming
+      </h2>
+      <Slider
+        items={upcoming.map((upcoming) => (
+          <AnimeSeasonUpcoming upcoming={upcoming} key={upcoming.mal_id} />
+        ))}
+        autoPlay
+        autoPlayInterval={3000}
+      />
+      {/* <div className="bg-gray-900 flex">{renderUpcoming}</div> */}
       <div className="bg-gray-900">
         <div className="mx-auto max-w-full px-4 py-16">
           <h2 className="text-2xl font-bold tracking-tight text-white">

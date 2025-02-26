@@ -3,11 +3,12 @@ import type { AnimeTop } from "../api/types/AnimeTop";
 
 interface TopProps {
   top: AnimeTop;
+  mode?: number;
 }
 
-export default function AnimeTopItem({ top }: TopProps) {
+export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
   //รับตัวแปรเป็นค่า top เเล้ว top ที่ได้ออกมาเป็น top: AnimeTop จึงใช้ destructuring {top} ออกมา ทำให้ไม่ต้อง ใช้ top.top.xxx
-  return (
+  const jsx1 = (
     <>
       <div className="h-auto flex justify-center ">
         <div className="w-4/5 flex pt-4 rounded-2xl shadow-2xl dark:bg-gray-800 dark:border-gray-700 m-10">
@@ -54,8 +55,11 @@ export default function AnimeTopItem({ top }: TopProps) {
           </div>
         </div>
       </div>
+    </>
+  );
 
-      {/* <!-- component --> */}
+  const jsx2 = (
+    <>
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -90,7 +94,7 @@ export default function AnimeTopItem({ top }: TopProps) {
                   {top.title}
                 </h1>
                 <div className="max-w-xl">
-                <p className="mt-6 text-justify">{top.synopsis}</p>
+                  <p className="mt-6 text-justify">{top.synopsis}</p>
                   <p className="mt-8 text-justify">{top.background}</p>
                 </div>
               </div>
@@ -140,60 +144,22 @@ export default function AnimeTopItem({ top }: TopProps) {
                   href="#"
                   className="text-base font-semibold leading-7 text-yellow-500"
                 >
-                  Details{" "}
-                  <span aria-hidden="true">&rarr;</span>
+                  Details <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      
-
-<div id="animation-carousel" className="relative w-full" data-carousel="static">
-    {/* <!-- Carousel wrapper --> */}
-    <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-         {/* <!-- Item 1 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-1.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-        </div>
-        {/* <!-- Item 2 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-2.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-        </div>
-        {/* <!-- Item 3 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item="active">
-            <img src="/docs/images/carousel/carousel-3.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-        </div>
-        {/* <!-- Item 4 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-4.svg" className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-        </div>
-        {/* <!-- Item 5 --> */}
-        <div className="hidden duration-200 ease-linear" data-carousel-item>
-            <img src={top.images.webp.large_image_url} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-        </div>
-    </div>
-    {/* <!-- Slider controls --> */}
-    <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span className="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span className="sr-only">Next</span>
-        </span>
-    </button>
-</div>
-
     </>
   );
+
+  switch (mode) {
+    case 1:
+      return jsx1;
+    case 2:
+      return jsx2;
+    default:
+      return <>Error</>;
+  }
 }
