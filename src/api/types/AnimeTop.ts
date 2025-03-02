@@ -1,4 +1,9 @@
 export interface AnimeTop {
+  data: TopData[];
+  pagination: Pagination;
+}
+
+export interface TopData {
   mal_id: number;
   url: string;
   images: {
@@ -111,13 +116,13 @@ export interface AnimeTop {
   }[];
 }
 
-// interface Pagination {
-//   last_visible_page: number;
-//   has_next_page: boolean;
-//   items: {
-//     count: number;
-//     total: number;
-//     per_page: number;
-//   };
-// }
+interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  items: {
+    count: number;
+    total: number;
+    per_page: number;
+  };
+}
 

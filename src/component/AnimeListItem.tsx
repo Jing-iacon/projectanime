@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import type { AnimeResult } from "../api/types/AnimeResult";
+import type { ResultData } from "../api/types/AnimeResult";
 
 interface AnimeListItemProps {
-  result: AnimeResult;
+  result: ResultData;
 }
 
 export default function AnimeListItem({ result }: AnimeListItemProps) {

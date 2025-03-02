@@ -33,7 +33,7 @@ interface CarouselProps {
   };
 
   return (
-    <div className="carousel">
+    <div className="carousel dark:bg-gray-800 dark:border-gray-700">
       <button className="carousel-button" onClick={prevSlide}>
         &lt;
       </button>

@@ -1,13 +1,13 @@
 import { getAnimeTop } from "../../api/queries/getAnimeTop";
 import { getAnimeSeasonUpcoming } from "../../api/queries/getAnimeSeasonUpcoming";
 import { getAnimeSeasonNow } from "../../api/queries/getAnimeSeaseonNow";
-import type { AnimeTop } from "../../api/types/AnimeTop";
+import type { TopData } from "../../api/types/AnimeTop";
 import type { AnimeSeasonUpcoming } from "../../api/types/AnimeSeasonUpcoming";
 import type { AnimeSeasonNow } from "../../api/types/AnimeSeasonNow";
 
 
 export interface AnimeLoaderResult {
-  top:  AnimeTop[];
+  top:  TopData[];
   upcoming: AnimeSeasonUpcoming[];
   now: AnimeSeasonNow;
 }

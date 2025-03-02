@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import type { AnimeTop } from "../api/types/AnimeTop";
+import type { TopData } from "../api/types/AnimeTop";
 
 interface TopProps {
-  top: AnimeTop;
+  top: TopData;
   mode?: number;
 }
 
@@ -10,7 +10,7 @@ export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
   //รับตัวแปรเป็นค่า top เเล้ว top ที่ได้ออกมาเป็น top: AnimeTop จึงใช้ destructuring {top} ออกมา ทำให้ไม่ต้อง ใช้ top.top.xxx
   const jsx1 = (
     <>
-      <div className="h-auto flex justify-center ">
+      <div className="h-auto flex justify-center dark:bg-gray-800 dark:border-gray-700">
         <div className="w-4/5 flex pt-4 rounded-2xl shadow-2xl dark:bg-gray-800 dark:border-gray-700 m-10">
           <div className="w-full flex justify-between rounded-lg p-6 text-white items-stretch">
             {/* ฝั่งซ้าย: Trailer + ข้อมูล */}

@@ -43,7 +43,7 @@ interface SliderProps {
   }, [autoPlay, autoPlayInterval, totalPages]);
 
   return (
-    <div className="slider">
+    <div className="slider dark:bg-gray-800 dark:border-gray-700">
       <div
         className="slider-wrapper"
         style={{
