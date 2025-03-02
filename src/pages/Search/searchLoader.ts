@@ -1,25 +1,44 @@
 import { searchResult } from "../../api/queries/searchResult";
-import type { AnimeResult } from "../../api/types/AnimeResult";
+import type {
+  ResultData,
+  AnimeResult,
+  pagination,
+} from "../../api/types/AnimeResult";
 
-export interface SearchLoaderResult{ // เป็น interface ที่ลิ้งระหว่างตัว return ของ searchLoader กับ useLoader Data
-  searchResult: AnimeResult[];
+export interface SearchLoaderResult {
+  searchResult: ResultData[];
+  pagination: pagination; // เพิ่มการส่ง pagination กลับไป
+  searchTerm: string;
 }
 
+export async function searchLoader({
+  request: { url },
+}: {
+  request: Request;
+}): Promise<SearchLoaderResult> {
+  // console.log("request.url:", url);
+  const urlObj = new URL(url);
+  // console.log(urlObj)
+  const {searchParams} = urlObj
+  // term=naruto&page=2
+  const term = searchParams.get("term");
+  const page = searchParams.get("page");
 
-export async function searchLoader({request} : {request: Request }): Promise<SearchLoaderResult> { // จะมี Obj เข้ามาใน loader เเล้วจะมี props ที่ขื่อ Request ดึงตัวนี้ออกมา
+  // console.log("term & page: ", { term, page });
 
-          const { searchParams } = new URL(request.url) // searchParams คือ queries string ที่อยู่ท้าย URL หรือสิ่งที่เราพิมพ์เข้าไป
-          const term = searchParams.get("term");
+  if (!term) {
+    throw new Error("Search term must be provided");
+  }
 
-          if(!term) {
-            throw new Error("Search must be provided") // เงื่อนไขนี้คือ ถ้า term เป็น null จะส่งค่า error ไป เพราะกันการเข้าถึงโดยไม่ใส่ค่า term
-          }
+  // ถ้าไม่มี page ส่งค่าเริ่มต้นเป็น 1
+  const pageNumber = page ? parseInt(page) : 1;
 
-          const result = await searchResult(term); // ดึง searchResult มาใช้หรือเรียก api นั่นล่ะ
-          console.log(result);
-          
-          return { // เพื่อที่เวลาเพิ่มข้อมูล api จะได้เพิ่มง่าย ๆ return to obj ที่ประกอบไปด้วยหลาย ๆ api
-            searchResult: result, // เหตุผลในการสร้าง interface SearchLoaderResult
-        };
-        }
- // search loader ดึงข้อมูล จาก searchResults มาอีกที     
+  const result: AnimeResult = await searchResult(term, pageNumber); // เปลี่ยนจากการส่งแค่ data เป็นการส่งทั้ง data และ pagination
+  console.log(result);
+
+  return {
+    searchResult: result.data, // ส่งแค่ data ไปให้ searchResult
+    pagination: result.pagination, // เพิ่มการส่ง pagination ไปด้วย
+    searchTerm: term,
+  };
+}
