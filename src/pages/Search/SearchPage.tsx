@@ -18,7 +18,6 @@ export default function SearchPage() {
 
   const totalPages = pagination.last_visible_page; // ใช้ last_visible_page แทน total
   // console.log("totalPages :",totalPages);
-  
 
   // ฟังก์ชันสำหรับไปหน้าถัดไป
   const goToNextPage = () => {

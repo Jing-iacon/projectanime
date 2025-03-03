@@ -5,40 +5,64 @@ import AnimeSeasonUpcoming from "../../component/AnimeSeasonUpcoming";
 import AnimeSeasonNow from "../../component/AnimeSeasonNow";
 import Carousel from "../../component/Carousel";
 import Slider from "../../component/Slider";
+import { useEffect, useState} from "react";
+import { getAnimeSeasonNow } from "../../api/queries/getAnimeSeaseonNow";
 
 export default function HomePage() {
-  const { top, upcoming, now } = useLoaderData() as AnimeLoaderResult;
-  console.log("topAnime", top);
-  console.log("animeSeasonUpcoming", upcoming);
-  console.log("animeNow", now);
+  const { top, upcoming, now: initialData, pagination } = useLoaderData() as AnimeLoaderResult;
 
-  // const renderTop = top.map((top) => {
-  //   return <AnimeTopItem top={top} mode={2} key={top.data.mal_id} />;
-  // });
+  const [currentPage, setCurrentPage] = useState(pagination.current_page);
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
 
-  // const renderUpcoming = upcoming.map((upcoming) => {
-  //   return <AnimeSeasonUpcoming upcoming={upcoming} key={upcoming.mal_id} />;
-  // });
+  const totalPages = pagination.last_visible_page;
 
-  const renderNow = now.data.map((now) => (
+  const goToNextPage = () => {
+    if (currentPage < totalPages && data.length > 0) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  const fetchDataForCurrentPage = async () => {
+    setLoading(true);
+    try {
+      const response = await getAnimeSeasonNow(currentPage);
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataForCurrentPage();
+  }, [currentPage]);
+
+  const renderNow = data.map((now) => (
     <AnimeSeasonNow now={now} key={now.mal_id} />
   ));
 
   return (
+    <>
     <div>
       <hr />
       <h2 className="text-2xl font-bold tracking-tight text-white dark:bg-gray-800 dark:border-gray-700">
         Top Anime
       </h2>
       <Carousel
-        autoPlayInterval={3000}
+        autoPlayInterval={5000}
         items={top.map((e) => (
           <AnimeTopItem top={e} mode={1} key={e.mal_id} />
-        ))
-        }
+        ))}
       />
-    
-      {/* <div className="bg-gray-900">{renderTop}</div> */}
+
       <h2 className="text-2xl font-bold tracking-tight text-white dark:bg-gray-800 dark:border-gray-700">
         Anime Season Upcoming
       </h2>
@@ -47,10 +71,10 @@ export default function HomePage() {
           <AnimeSeasonUpcoming upcoming={upcoming} key={upcoming.mal_id} />
         ))}
         autoPlay
-        autoPlayInterval={3000}
+        autoPlayInterval={5000}
       />
-      {/* <div className="bg-gray-900 flex">{renderUpcoming}</div> */}
-      <div className="bg-gray-900">
+    </div>
+    <div className="bg-gray-900">
         <div className="mx-auto max-w-full px-4 py-16">
           <h2 className="text-2xl font-bold tracking-tight text-white">
             Anime Season Now
@@ -59,7 +83,28 @@ export default function HomePage() {
             {renderNow}
           </div>
         </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center gap-4 mt-8">
+          <button
+            onClick={goToPrevPage}
+            disabled={currentPage === 1 || loading}
+            className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <span className="text-white">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={goToNextPage}
+            disabled={currentPage === totalPages || loading || data.length === 0}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import type { AnimeTop,TopData } from "../types/AnimeTop";
+import type { TopData } from "../types/AnimeTop";
 
 interface TopAnime {
   data: TopData[]
