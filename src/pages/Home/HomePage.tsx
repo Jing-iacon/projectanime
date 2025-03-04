@@ -42,6 +42,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchDataForCurrentPage();
   }, [currentPage]);
 
