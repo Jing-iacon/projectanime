@@ -47,7 +47,7 @@ export default function SearchPage() {
     setLoading(true); // เริ่มโหลดข้อมูล
     fetchDataForCurrentPage();
     // console.log("CurrentPage: " + currentPage);
-  }, [currentPage]); // เมื่อ currentPage, limit หรือ searchTerm เปลี่ยนแปลงจะโหลดข้อมูลใหม่
+  }, [currentPage, searchTerm]); // เมื่อ currentPage, limit หรือ searchTerm เปลี่ยนแปลงจะโหลดข้อมูลใหม่
 
   const renderResult = data.map((result) => {
     return <AnimeListItem result={result} key={result.mal_id} />;

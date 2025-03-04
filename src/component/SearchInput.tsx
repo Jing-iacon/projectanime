@@ -6,6 +6,7 @@ import { VscSearch } from "react-icons/vsc";
 
 export default function SearchInput() {
     const [term, setTerm] = useState('');
+    
 
     const navigate = useNavigate();
 
