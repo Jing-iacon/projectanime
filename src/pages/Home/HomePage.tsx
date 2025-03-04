@@ -30,23 +30,18 @@ export default function HomePage() {
   };
 
   const fetchDataForCurrentPage = async () => {
-    setLoading(true);
-    try {
-      const response = await getAnimeSeasonNow(currentPage);
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      const response = await getAnimeSeasonNow(currentPage); // ส่งคำค้นหาและ currentPage ไป
+      setData(response.data); // อัปเดตข้อมูล
+      // console.log("Result:", response.data);
+      setLoading(false); // หยุดโหลด
+    };
 
   useEffect(() => {
     setLoading(true);
     fetchDataForCurrentPage();
   }, [currentPage]);
 
-  const renderNow = data.map((now) => (
+  const renderNow = (data ?? []).map((now) => (
     <AnimeSeasonNow now={now} key={now.mal_id} />
   ));
 
@@ -89,7 +84,7 @@ export default function HomePage() {
         <div className="flex justify-center gap-4 mt-8">
           <button
             onClick={goToPrevPage}
-            disabled={currentPage === 1 || loading}
+            disabled={currentPage === totalPages}
             className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
           >
             Previous
@@ -99,7 +94,7 @@ export default function HomePage() {
           </span>
           <button
             onClick={goToNextPage}
-            disabled={currentPage === totalPages || loading || data.length === 0}
+            disabled={currentPage === totalPages }
             className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50"
           >
             Next

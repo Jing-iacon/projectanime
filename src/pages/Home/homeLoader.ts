@@ -30,6 +30,6 @@ export async function homeLoader({ request }: { request: Request }): Promise<Ani
     top,
     upcoming,
     now: now.data,
-    pagination: now.pagination
-  };
+    pagination: now.pagination 
+}
 }
