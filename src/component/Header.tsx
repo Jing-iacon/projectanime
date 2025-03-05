@@ -18,7 +18,7 @@ export default function Header() {
               Home
             </Link>
         
-            <Link className="text-lg font-bold mx-8 whitespace-nowrap inline-block" to="/">
+            <Link className="text-lg font-bold mx-8 whitespace-nowrap inline-block" to="/myfavorite">
               My Favorite
             </Link>
           

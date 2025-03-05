@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import type { AnimeData } from "../api/types/AnimeSeasonNow";
+import { addAnimeFavorite } from "../pages/MyFavorite/myFavoriteLoader";
 
 interface AnimeNowItemProps {
   now: AnimeData;
 }
 
 export default function AnimeSeasonNow({ now }: AnimeNowItemProps) {
+  const handleAddFavorite = () => {
+      addAnimeFavorite(now); // บันทึกลง Local Storage
+    };
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 w-full flex flex-col">
       <Link to={`/details/${now.mal_id}`}>
@@ -36,12 +40,12 @@ export default function AnimeSeasonNow({ now }: AnimeNowItemProps) {
           >
             Read more
           </Link>
-          <Link
-            to={`/myfavorite/`}
+          <button
+            onClick={handleAddFavorite}
             className="w-[140px] mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-400 dark:hover:bg-blue-300 dark:focus:ring-blue-800"
           >
             Add Favorite
-          </Link>
+          </button>
         </div>
       </div>
     </div>
