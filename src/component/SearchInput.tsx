@@ -28,7 +28,7 @@ export default function SearchInput() {
                 <input 
                 value={term} 
                 onChange={(e) => setTerm(e.target.value)}
-                className="pl-10 py-2 w-full border-0 shadow-none"
+                className="pl-10 py-2  border-0 shadow-none text-white w-[300px]"
                 placeholder="Search Anime"
                 />
             </div>
