@@ -1,4 +1,5 @@
 import type { AnimeSeasonUpcoming } from "../api/types/AnimeSeasonUpcoming";
+import "./Upcoming.css"
 
 interface Upcoming {
   upcoming: AnimeSeasonUpcoming;
@@ -31,11 +32,13 @@ export default function AnimeSeasonUpcoming({ upcoming,idx }: Upcoming) {
 // </div>
 
 <div className="border-1 border-red-600">
-  <div className="container w-full h-[400px] border-1 border-white">
-    <div className="w-[60px] h-full border-1 border-red-600 text-white">
-    index: {idx}
+  <div className="containerupcoming w-full h-[400px] border-1 border-white">
+    <div className="sidebox1">
+    {idx}
     </div>
-
+    <div className="sidebox2">
+      {upcoming.title}
+    </div>
   </div>
 
 </div>
