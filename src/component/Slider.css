@@ -39,3 +39,46 @@
 .slider-button.next {
   right: 10px;
 }
+
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: auto;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slider-page {
+  display: flex;
+  /* แต่ละหน้าจอจะมีความกว้างเท่ากับ container */
+}
+
+.slide-item {
+  flex: 1;
+  margin: 5px;
+  /* ปรับแต่งเพิ่มเติมสำหรับการแสดงผลของแต่ละ item */
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.slider-button.prev {
+  left: 10px;
+}
+
+.slider-button.next {
+  right: 10px;
+}

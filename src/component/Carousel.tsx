@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./Carousel.css"; // ไฟล์ CSS สำหรับตกแต่ง
 
 interface CarouselProps {
-    items: React.ReactNode[]; // รองรับ string, JSX.Element หรือ Component ใดๆ
-    autoPlayInterval?: number;
-  }
-  
+  items: React.ReactNode[]; // รองรับ string, JSX.Element หรือ Component ใดๆ
+  autoPlayInterval?: number;
+}
 
-  const Carousel: React.FC<CarouselProps> = ({ items, autoPlayInterval = 3000 }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  items,
+  autoPlayInterval = 3000,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -33,16 +35,27 @@ interface CarouselProps {
   };
 
   return (
-    <div className="carousel dark:bg-gray-800 dark:border-gray-700">
-      <button className="carousel-button" onClick={prevSlide}>
-        &lt;
-      </button>
-      <div className="carousel-content">{items[currentIndex]}</div>
-      <button className="carousel-button" onClick={nextSlide}>
-        &gt;
-      </button>
+    <div className="carousel">
+      <button className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none carousel-button-left" onClick={prevSlide} data-carousel-prev>
+        <span className="inline-flex items-center justify-center w-10 h-10">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span className="sr-only">Previous</span>
+        </span>
+    </button>
+    <div className="carousel-content">{items[currentIndex]}</div>
+    
+    <button className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none carousel-button-right" onClick={nextSlide} data-carousel-next>
+        <span className="inline-flex items-center justify-center w-10 h-10 ">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span className="sr-only">Next</span>
+        </span>
+    </button>
     </div>
   );
-}
+};
 
 export default Carousel;

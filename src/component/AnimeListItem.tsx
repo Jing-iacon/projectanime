@@ -35,6 +35,11 @@ export default function AnimeListItem({ result }: AnimeListItemProps) {
           </p>
         </div>
         <div className="flex gap-3">
+          <Link to={`/details/${result.mal_id}`}>
+            <button className="w-[140px] mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-400 dark:hover:bg-blue-300 dark:focus:ring-blue-800">
+              Detail
+            </button>
+          </Link>
           <button
             onClick={handleAddFavorite}
             className="w-[140px] mt-4 inline-flex items-center justify-center p-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-400 dark:hover:bg-blue-300 dark:focus:ring-blue-800"
