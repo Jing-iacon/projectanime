@@ -40,7 +40,7 @@ export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
 
             {/* 🔹 หมวดหมู่และวันที่ */}
             <div className="flex items-center gap-4 text-gray-400 text-sm sm:text-base">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 text-green-400">
                 {top.type}  
               </div>
               <div className="flex items-center gap-1 ">

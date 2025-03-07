@@ -24,8 +24,8 @@ export default function AnimeDetailsItem({
   }
 }: AnimeDetailsItemProps) {
   return (
-    <div className="bg-gray-900">
-    <div className="bg-gray-900 text-white min-h-screen p-6 ">
+    
+    <div className="">
       <div className=" max-w-5xl mx-auto flex flex-col md:flex-row gap-6 ">
         {/* Anime Poster */}
         <div className="w-full md:w-1/4">
@@ -90,6 +90,6 @@ export default function AnimeDetailsItem({
         </div>
       </div>
     </div>
-    </div>
+    
   );
 }

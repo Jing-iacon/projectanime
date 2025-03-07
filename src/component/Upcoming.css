@@ -1,6 +1,5 @@
 .containerupcoming {
     display: flex;
-    flex-direction: column-reverse;
 
 }
 .sidebox1 {
@@ -13,17 +12,17 @@
     font-weight: 600;
     color: red;
     width: 50px;
-    border: 1px solid red;
+   
 }
 
 .sidebox2 {
     display: flex;
     justify-content: start;
     align-items: center;
-    border: 1px solid red;
+   
     color: white;
     width: 50px;
-    height: 350px;
+    height: 425px;
     writing-mode: vertical-rl;
     rotate:180deg;
     padding: 10px 10px;
@@ -32,3 +31,9 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.imgcartoon {
+    width: auto;
+    height: 450px;
+}
+

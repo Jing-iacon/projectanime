@@ -26,6 +26,8 @@ export async function homeLoader({ request }: { request: Request }): Promise<Ani
   const top = await getAnimeTop(); 
   const upcoming = await getAnimeSeasonUpcoming();
   const now = await getAnimeSeasonNow(page);
+
+  
   return {
     top,
     upcoming,

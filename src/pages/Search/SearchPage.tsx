@@ -54,7 +54,7 @@ export default function SearchPage() {
   });
 
   return (
-    <div className="bg-gray-900">
+    <div className="bg-black bg-opacity-50 top-50 left-0 z-50 shadow-md">
       <div className="mx-auto max-w-full px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold tracking-tight text-white">
           Search Result For {searchTerm}
