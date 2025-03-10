@@ -5,7 +5,7 @@ interface SearchAnime {
   pagination: pagination;
 }
 
-export async function searchResult(term: string, page: number = 1, limit: number = 12): Promise<AnimeResult> {
+export async function searchResult(term: string, page: number = 1, limit: number = 18): Promise<AnimeResult> {
     const res = await fetch(`https://api.jikan.moe/v4/anime?q=${term}&page=${page}&limit=${limit}`);
 
     if (!res.ok) {

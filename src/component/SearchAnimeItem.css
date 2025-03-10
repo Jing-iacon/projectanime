@@ -1,21 +1,17 @@
-.now-body {
+.res-body {
     width: full;
     height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
+
+    
  
 
 }
 
+.wrapper-res {
 
-.now-container {
-    margin: 20px;  
-}
-
-.wrapper-now {
-    margin: 20px 20px;
     width: 290px;
     height: 550px;
 }
@@ -33,4 +29,3 @@
     
 
 }
-

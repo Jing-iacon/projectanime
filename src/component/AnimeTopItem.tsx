@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import type { TopData } from "../api/types/AnimeTop";
 import { addAnimeFavorite } from "../pages/MyFavorite/myFavoriteLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // 🔹 ต้อง import CSS ด้วย
 
 interface TopProps {
   top: TopData;
@@ -11,9 +13,18 @@ export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
   //รับตัวแปรเป็นค่า top เเล้ว top ที่ได้ออกมาเป็น top: AnimeTop จึงใช้ destructuring {top} ออกมา ทำให้ไม่ต้อง ใช้ top.top.xxx
   const handleAddFavorite = () => {
     addAnimeFavorite(top); // บันทึกลง Local Storage
+    toast.success("Anime added to list!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+    });
+
   };
   const jsx1 = (
-    <>
       <header className="w-full bg-black bg-opacity-50 top-50 left-0 z-50 shadow-md p-4 mx-4">
         <div className="flex flex-col lg:flex-row gap-6 lg:pr-10">
           {/* 🔹 คอลัมน์ซ้าย (ข้อมูลอนิเมะ) */}
@@ -109,8 +120,10 @@ export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
             </div>
           </div>
         </div>
+        <ToastContainer className="z-[9999]" />
       </header>
-    </>
+      
+ 
   );
 
   switch (mode) {
