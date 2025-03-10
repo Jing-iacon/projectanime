@@ -1,4 +1,4 @@
-import type { ResultData, pagination } from "../../api/types/AnimeResult";
+import type { ResultData } from "../../api/types/AnimeResult";
 
 const localKey = "addlist";
 export const getAnimeAdd = (): ResultData[] => {
