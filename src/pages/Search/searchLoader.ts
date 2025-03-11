@@ -18,7 +18,7 @@ export async function searchLoader({
 }): Promise<SearchLoaderResult> {
   // console.log("request.url:", url);
   const urlObj = new URL(url);
-  // console.log(urlObj)
+  console.log(urlObj)
   const {searchParams} = urlObj
   // term=naruto&page=2
   const term = searchParams.get("term");

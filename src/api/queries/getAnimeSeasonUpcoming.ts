@@ -10,6 +10,8 @@ export async function getAnimeSeasonUpcoming(): Promise<AnimeSeasonUpcoming[]> {
 
   return data.data.map((anime, idx) => ({
     ...anime,
-    idx: idx + 1 // เริ่มที่ 1 (ถ้าต้องการเริ่มที่ 0 ให้ลบ `+ 1`)
+    idx: idx + 1 // เริ่มที่ 1 (ถ้าต้องการเริ่มที่ 0 ให้ลบ `+ 1`),
+    
+    
   }));  //.map((anime: any) => ({...anime}));
 }
