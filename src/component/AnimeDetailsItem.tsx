@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import type { AnimeDetails } from "../api/types/AnimeDetail";
 import { addAnimeFavorite } from "../pages/MyFavorite/myFavoriteLoader";
 import { ToastContainer, toast } from "react-toastify";
