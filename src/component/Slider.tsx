@@ -15,7 +15,9 @@ const Slider: React.FC<SliderProps> = ({
     autoPlayInterval = 3000,
 }) => {
     const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage);
+    const [currentPage, setCurrentPage] = useState(0);
 
+    // Handle responsive behavior
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
@@ -35,25 +37,23 @@ const Slider: React.FC<SliderProps> = ({
         return () => window.removeEventListener('resize', handleResize);
     }, [defaultItemsPerPage]);
 
+    // Create pages from items
     const pages = [];
     for (let i = 0; i < items.length; i += itemsPerPage) {
         pages.push(items.slice(i, i + itemsPerPage));
     }
     const totalPages = pages.length;
-    const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Navigation functions
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === totalPages - 1 ? 0 : prevIndex + 1
-        );
+        setCurrentPage(prev => (prev === totalPages - 1 ? 0 : prev + 1));
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? totalPages - 1 : prevIndex - 1
-        );
+        setCurrentPage(prev => (prev === 0 ? totalPages - 1 : prev - 1));
     };
 
+    // Auto-play functionality
     useEffect(() => {
         if (!autoPlay) return;
         const timer = setInterval(() => {
@@ -62,13 +62,16 @@ const Slider: React.FC<SliderProps> = ({
         return () => clearInterval(timer);
     }, [autoPlay, autoPlayInterval, totalPages]);
 
+    // If no items or pages, don't render anything
+    if (pages.length === 0) return null;
+
     return (
         <div className="slider">
             <div
                 className="slider-wrapper"
                 style={{
                     width: `${totalPages * 100}%`,
-                    transform: `translateX(-${currentIndex * (100 / totalPages)}%)`,
+                    transform: `translateX(-${currentPage * (100 / totalPages)}%)`,
                 }}
             >
                 {pages.map((page, pageIndex) => (
@@ -104,6 +107,17 @@ const Slider: React.FC<SliderProps> = ({
             <button onClick={nextSlide} className="slider-button next">
                 &#10095;
             </button>
+            
+            {/* Page indicators */}
+            <div className="slider-indicators">
+                {pages.map((_, index) => (
+                    <button
+                        key={index}
+                        className={`indicator ${currentPage === index ? 'active' : ''}`}
+                        onClick={() => setCurrentPage(index)}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

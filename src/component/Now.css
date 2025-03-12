@@ -1,19 +1,56 @@
 .now-body {
-    width: full;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    margin-top: 80px;
- 
-
+  
 }
-
 
 .now-container {
-    margin: 20px;  
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 1400px;
 }
 
+/* Anime card styling */
+.anime-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgba(17, 17, 17, 0.7);
+    transition: transform 0.3s ease;
+}
+
+.anime-image-container {
+    overflow: hidden;
+    aspect-ratio: 3/4;
+}
+
+.anime-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.anime-card:hover .anime-image-container img {
+    transform: scale(1.05);
+}
+
+.anime-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .now-container {
+        padding: 0 0.5rem;
+    }
+}
 .wrapper-now {
     margin: 20px 20px;
     width: 290px;
