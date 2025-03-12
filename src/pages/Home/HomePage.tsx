@@ -57,13 +57,15 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="bg-black bg-opacity-50 top-50 left-0 z-50 shadow-md">
-        <Carousel
-          autoPlayInterval={5000}
-          items={top.map((e) => (
-            <AnimeTopItem top={e} mode={1} key={e.mal_id} />
-          ))}
-        />
+      <div className="bg-black bg-opacity-50 top-50 left-0 z-50 shadow-md space-y-8">
+        <div className="relative">
+          <Carousel
+            autoPlayInterval={5000}
+            items={top.map((e) => (
+              <AnimeTopItem top={e} mode={1} key={e.mal_id} />
+            ))}
+          />
+        </div>
 
         <div className="text-white mt-20 text-3xl ml-14 font-bold">
           Anime Upcoming

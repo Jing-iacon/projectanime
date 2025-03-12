@@ -8,60 +8,33 @@
 .slider-wrapper {
   display: flex;
   transition: transform 0.5s ease;
-}
-
-.slider-page {
-  display: flex;
-  /* แต่ละหน้าจอจะมีความกว้างเท่ากับ container */
-}
-
-.slide-item {
-  flex: 1;
-  margin: 5px;
-  /* ปรับแต่งเพิ่มเติมสำหรับการแสดงผลของแต่ละ item */
-}
-
-.slider-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-.slider-button.prev {
-  left: 10px;
-}
-
-.slider-button.next {
-  right: 10px;
-}
-
-
-.slider {
-  position: relative;
-  overflow: hidden;
   width: 100%;
-  margin: auto;
-}
-
-.slider-wrapper {
-  display: flex;
-  transition: transform 0.5s ease;
 }
 
 .slider-page {
-  display: flex;
-  /* แต่ละหน้าจอจะมีความกว้างเท่ากับ container */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .slide-item {
-  flex: 1;
-  margin: 5px;
-  /* ปรับแต่งเพิ่มเติมสำหรับการแสดงผลของแต่ละ item */
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.slide-item img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 450px;
+  display: block;
 }
 
 .slider-button {
@@ -73,6 +46,7 @@
   border: none;
   padding: 8px 12px;
   cursor: pointer;
+  z-index: 10;
 }
 
 .slider-button.prev {
@@ -81,4 +55,20 @@
 
 .slider-button.next {
   right: 10px;
+}
+
+@media (max-width: 768px) {
+  .slider-page {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-page {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
 }

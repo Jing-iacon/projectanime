@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
   
-  margin: 0 auto; /* จัดกึ่งกลาง */
+  padding: 0 2rem; /* Added padding for sides */
 }
 
 /* 🎯 เนื้อหา Carousel */
@@ -19,7 +19,7 @@
   justify-content: center;
   overflow: hidden;
   z-index: 1;
-  
+  gap: 2rem; /* Added gap between items */
 }
 
 /* 🎯 ปุ่มเลื่อนซ้าย-ขวา */
@@ -28,28 +28,27 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5); /* พื้นหลังโปร่งใส */
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
-
-  width: 32px; /* ✅ ปรับขนาดปุ่มให้เล็กลง */
-  height: 32px; /* ✅ ปรับขนาดปุ่มให้เล็กลง */
-  padding: 6px 10px; /* ✅ ลด padding */
+  width: 40px;
+  height: 40px;
+  padding: 8px;
   cursor: pointer;
-  font-size: 14px; /* ✅ ลดขนาดไอคอน */
-  border-radius: 50%; /* ✅ ทำให้เป็นวงกลม */
-  transition: background 0.3s, transform 0.2s;
-  border: 3px solid rgb(31, 30, 30);
-  
+  font-size: 14px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  border: 2px solid rgb(31, 30, 30);
+  z-index: 10;
 }
 
 /* 🎯 ปุ่มซ้าย */
 .carousel-button-left {
-  left: 1100px; /* ✅ ลดระยะห่างจากขอบ */
+  left: 20px;
 }
 
 /* 🎯 ปุ่มขวา */
 .carousel-button-right {
-  right: 220px; /* ✅ ลดระยะห่างจากขอบ */
+  right: 20px;
 }
 
 /* 🎯 เอฟเฟกต์ Hover */
@@ -70,5 +69,5 @@
      padding: 4px 8px; /*✅ ลด padding ให้เหมาะสม */
      
    } 
- } 
+ }
 
