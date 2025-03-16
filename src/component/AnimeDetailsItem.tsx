@@ -99,7 +99,7 @@ export default function AnimeDetailsItem({details}: AnimeDetailsItemProps) {
                                         {details.genres?.map((genre) => (
                                             <span 
                                                 key={genre.name}
-                                                className="px-3 py-1 bg-zinc-800 text-gray-200 rounded-full text-sm
+                                                className="py-1 bg-zinc-800 text-gray-200 rounded-full text-sm
                                                 hover:bg-zinc-700 transition-colors duration-200"
                                             >
                                                 {genre.name}

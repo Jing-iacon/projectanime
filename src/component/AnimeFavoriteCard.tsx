@@ -4,7 +4,7 @@ import type { ResultData } from "../api/types/AnimeResult";
 
 interface AnimeCardProps {
   anime: ResultData;
-  onRemove?: (mal_id: number) => void; // รองรับการลบ (optional)
+  onRemove?: (mal_id: number) => void; // รองรับการลบ (optional) // void หมายถึง การไม่คืนค่า หรือ ไม่คืนผลลัพธ์ จากฟังก์ชันนั้น ๆ เมื่อฟังก์ชันทำงานเสร็จสิ้น
 }
 
 export default function AnimeFavoriteCard({ anime, onRemove }: AnimeCardProps) {

@@ -10,22 +10,23 @@ const MyFavoritePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleStorageChange = () => {
+    const updateFavorites = () => {
       setLoading(true);
       setFavoriteList(getAnimeAdd());
       setLoading(false);
     };
-
-    setLoading(true);
-    setFavoriteList(getAnimeAdd());
-    setLoading(false);
-
-    window.addEventListener("favoritesUpdated", handleStorageChange);
+  
+    updateFavorites(); // โหลดข้อมูลครั้งแรก
+  
+    window.addEventListener("favoritesUpdated", updateFavorites);
     return () => {
-      window.removeEventListener("favoritesUpdated", handleStorageChange);
+    window.removeEventListener("favoritesUpdated", updateFavorites);
     };
   }, []);
-
+  
+  //การใช้ window.dispatchEvent เป็นวิธีการหนึ่งในการ สื่อสารระหว่างคอมโพเนนต์โดยไม่ต้องใช้ prop หรือ state โดยตรง
+  // ในกรณีนี้, เมื่อผู้ใช้ทำการเปลี่ยนแปลง favorites (เพิ่ม/ลบอนิเมะ) ข้อมูลจะถูกอัพเดตแล้วเราจะส่งสัญญาณไปยัง window เพื่อให้ทุกๆ ส่วนของแอปที่ฟังอีเวนต์นี้ (ผ่าน addEventListener) รีเฟรชข้อมูล favorites
+  
   const FavoriteSection = () => (
     <div className="now-body w-full box-border flex flex-col">
       <div className="nowbody-container px-4">

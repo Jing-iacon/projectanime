@@ -10,8 +10,4 @@ export async function getAnimeTop(): Promise<TopData[]> {
   const data: TopAnime = await topAnime.json();
 
   return data.data
-} //.map((anime: AnimeTop) => ({
-//   ...anime,
-//   genres: anime.genres?.map((e) => ({...e})) || [], // ป้องกัน undefined
-// }));
-// }
+} 

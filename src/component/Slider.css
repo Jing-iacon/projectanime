@@ -13,28 +13,54 @@
 
 .slider-page {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, 1fr); /* Default: 5 items per page */
   gap: 1rem;
   padding: 1rem;
   width: 100%;
   min-width: 0;
 }
 
-.slide-item {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
+/* Responsive breakpoints - matching the useEffect logic */
+@media (max-width: 1023px) {
+  .slider-page {
+    grid-template-columns: repeat(4, 1fr); /* 4 items per page */
+  }
 }
 
-.slide-item img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  max-height: 450px;
-  display: block;
+@media (max-width: 767px) {
+  .slider-page {
+    grid-template-columns: repeat(3, 1fr); /* 3 items per page */
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .slider-page {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per page */
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+}
+
+.slider-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: white;
 }
 
 .slider-button {
@@ -55,20 +81,4 @@
 
 .slider-button.next {
   right: 10px;
-}
-
-@media (max-width: 768px) {
-  .slider-page {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0.5rem;
-    padding: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .slider-page {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 0.25rem;
-    padding: 0.25rem;
-  }
 }

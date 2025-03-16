@@ -17,8 +17,8 @@ export default function HomePage() {
   } = useLoaderData() as AnimeLoaderResult;
 
   const [currentPage, setCurrentPage] = useState(pagination.current_page);
-  const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(initialData); 
+  const [loading, setLoading] = useState(true); //บรรทัดนี้ตั้งค่าสถานะ loading เป็น true เพื่อระบุว่าการดำเนินการดึงข้อมูลกำลังจะเริ่มต้น ช่วยในการจัดการองค์ประกอบ UI เช่น การแสดงตัวหมุนโหลด
 
   const totalPages = pagination.last_visible_page;
 
@@ -35,7 +35,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (loading) {
-      return setLoading(false);
+      return setLoading(false); // 2 บรรทัดนี้เป็นการตรวจสอบสถานะ เพื่อป้องกันไม่ใม่ให้ทำงานซ้ำ
     }
     setLoading(true);
     fetchDataForCurrentPage();
@@ -51,7 +51,8 @@ export default function HomePage() {
   };
 
   // Section components
-  const TopSection = () => (
+  const TopSection = () => (// ทำ component ชื่อ TopSection โดยรับค่า top จาก useLoaderDataเเละครอบด้วย carousel 
+  // โดยใน carousel ส่ง prop ชื่อ items เป็น top.map(item => ( เเละ autoPlayInterval = 5000
     <div className="relative">
       <Carousel
         autoPlayInterval={5000}

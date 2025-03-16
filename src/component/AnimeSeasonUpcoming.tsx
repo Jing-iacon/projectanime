@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import type { AnimeSeasonUpcoming } from "../api/types/AnimeSeasonUpcoming";
 import "./Upcoming.css";
-import { addAnimeFavorite } from "../pages/MyFavorite/myFavoriteLoader";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Upcoming {

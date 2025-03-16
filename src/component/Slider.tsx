@@ -8,40 +8,42 @@ interface SliderProps {
     autoPlayInterval?: number;
 }
 
-const Slider: React.FC<SliderProps> = ({
+const Slider = ({
     items,
     itemsPerPage: defaultItemsPerPage = 5,
     autoPlay = true,
     autoPlayInterval = 3000,
-}) => {
-    const [itemsPerPage, setItemsPerPage] = useState(defaultItemsPerPage);
+}: SliderProps) => {
     const [currentPage, setCurrentPage] = useState(0);
+    const [currentItemsPerPage, setCurrentItemsPerPage] = useState(defaultItemsPerPage);
 
-    // Handle responsive behavior
+    // Add responsive handling
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
             if (width < 640) {
-                setItemsPerPage(2);
+                setCurrentItemsPerPage(2);
             } else if (width < 768) {
-                setItemsPerPage(3);
+                setCurrentItemsPerPage(3);
             } else if (width < 1024) {
-                setItemsPerPage(4);
+                setCurrentItemsPerPage(4);
             } else {
-                setItemsPerPage(defaultItemsPerPage);
+                setCurrentItemsPerPage(defaultItemsPerPage);
             }
         };
 
-        handleResize();
+        handleResize(); // Initial check
         window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize); 
+        //Cleanup เมื่อ component ถูก unmount หรือ defaultItemsPerPage เปลี่ยน
     }, [defaultItemsPerPage]);
 
-    // Create pages from items
-    const pages = [];
-    for (let i = 0; i < items.length; i += itemsPerPage) {
-        pages.push(items.slice(i, i + itemsPerPage));
+    // Update pages creation to use currentItemsPerPage
+    const pages = []; // ใช้แบ่ง items เป็นหน้าๆ
+    for (let i = 0; i < items.length; i += currentItemsPerPage) {
+        pages.push(items.slice(i, i + currentItemsPerPage));
     }
+    
     const totalPages = pages.length;
 
     // Navigation functions
@@ -80,10 +82,6 @@ const Slider: React.FC<SliderProps> = ({
                         className="slider-page"
                         style={{
                             width: `${100 / totalPages}%`,
-                            display: 'grid',
-                            gridTemplateColumns: `repeat(${itemsPerPage}, 1fr)`,
-                            gap: '1rem',
-                            padding: '1rem'
                         }}
                     >
                         {page.map((item, index) => (
@@ -108,16 +106,7 @@ const Slider: React.FC<SliderProps> = ({
                 &#10095;
             </button>
             
-            {/* Page indicators */}
-            <div className="slider-indicators">
-                {pages.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`indicator ${currentPage === index ? 'active' : ''}`}
-                        onClick={() => setCurrentPage(index)}
-                    />
-                ))}
-            </div>
+            {/* Removed the page indicators section */}
         </div>
     );
 }

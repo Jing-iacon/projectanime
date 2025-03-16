@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./Carousel.css"; // ไฟล์ CSS สำหรับตกแต่ง
 
 interface CarouselProps {
-  items: React.ReactNode[]; // รองรับ string, JSX.Element หรือ Component ใดๆ
+  items: React.ReactNode[]; // ประเภทของข้อมูล typescript ที่ครอบคลุมทุกประเภทเช่น string, number, boolean, object, array, หรือ null, หรือ undefined.
   autoPlayInterval?: number;
 }
 
-const Carousel: React.FC<CarouselProps> = ({
+const Carousel = ({
   items,
   autoPlayInterval = 3000,
-}) => {
+}: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = setInterval(() => { //ใช้ setInterval เพื่อเรียกฟังก์ชันที่อยู่ข้างในซ้ำ ๆ ตามเวลาที่กำหนด (autoPlayInterval)
       setCurrentIndex((prevIndex) =>
         prevIndex === items.length - 1 ? 0 : prevIndex + 1
       );
