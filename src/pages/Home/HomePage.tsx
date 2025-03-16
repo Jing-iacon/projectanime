@@ -12,14 +12,19 @@ export default function HomePage() {
   const {
     top,
     upcoming,
-    now: initialData,
+    now: initialData, //เปลี่ยนเป็น initialData เพราะอาจทำให้เกิดความสับสนหรือการชนกันของชื่อตัวแปรได้.
     pagination,
   } = useLoaderData() as AnimeLoaderResult;
 
   const [currentPage, setCurrentPage] = useState(pagination.current_page);
-  const [data, setData] = useState(initialData); 
-  const [loading, setLoading] = useState(true); //บรรทัดนี้ตั้งค่าสถานะ loading เป็น true เพื่อระบุว่าการดำเนินการดึงข้อมูลกำลังจะเริ่มต้น ช่วยในการจัดการองค์ประกอบ UI เช่น การแสดงตัวหมุนโหลด
-
+  // ตัวแปรนี้จะถูกใช้ในการแสดงข้อมูลอนิเมะในหน้าๆ หนึ่งในหมวด Anime Season Now.
+  const [data, setData] = useState(initialData);
+  // ถ้าใช้ now ตรง ๆ อาจสับสนว่าเป็นค่าคงที่ (const) หรือค่าที่อัปเดตได้ (useState)
+  // now จาก useLoaderData() เป็นค่าตั้งต้นจากเซิร์ฟเวอร์.
+  // แต่ useState(now) จะทำให้ now กลายเป็นค่าที่เปลี่ยนแปลงได้.
+  // อาจทำให้คนอ่านโค้ดเข้าใจผิดว่าค่า now เปลี่ยนแปลงโดยตรง.
+  const [loading, setLoading] = useState(true);
+  //บรรทัดนี้ตั้งค่าสถานะ loading เป็น true เพื่อระบุว่าการดำเนินการดึงข้อมูลกำลังจะเริ่มต้น ช่วยในการจัดการองค์ประกอบ UI เช่น การแสดงตัวหมุนโหลด
   const totalPages = pagination.last_visible_page;
 
   const fetchDataForCurrentPage = async () => {
@@ -42,21 +47,22 @@ export default function HomePage() {
   }, [currentPage]);
 
   // Navigation handlers
-  const handlePagination = (direction: 'prev' | 'next') => {
-    if (direction === 'next' && currentPage < totalPages && data.length > 0) {
-      setCurrentPage(prev => prev + 1);
-    } else if (direction === 'prev' && currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
+  const handlePagination = (direction: "prev" | "next") => {
+    if (direction === "next" && currentPage < totalPages && data.length > 0) {
+      setCurrentPage((prev) => prev + 1);
+    } else if (direction === "prev" && currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
     }
   };
 
   // Section components
-  const TopSection = () => (// ทำ component ชื่อ TopSection โดยรับค่า top จาก useLoaderDataเเละครอบด้วย carousel 
-  // โดยใน carousel ส่ง prop ชื่อ items เป็น top.map(item => ( เเละ autoPlayInterval = 5000
+  const TopSection = () => (
+    // ทำ component ชื่อ TopSection โดยรับค่า top จาก useLoaderDataเเละครอบด้วย carousel
+    // โดยใน carousel ส่ง prop ชื่อ items เป็น top.map(item => ( เเละ autoPlayInterval = 5000
     <div className="relative">
       <Carousel
         autoPlayInterval={5000}
-        items={top.map(item => (
+        items={top.map((item) => (
           <AnimeTopItem top={item} mode={1} key={item.mal_id} />
         ))}
       />
@@ -100,7 +106,7 @@ export default function HomePage() {
   const PaginationControls = () => (
     <div className="flex items-center justify-center gap-4 bg-black bg-opacity-50 p-6">
       <button
-        onClick={() => handlePagination('prev')}
+        onClick={() => handlePagination("prev")}
         disabled={currentPage === 1 || loading}
         className="px-4 py-2 bg-gray-700 text-white rounded-md disabled:opacity-50 
           hover:bg-gray-600 transition-all hover:scale-105"
@@ -113,7 +119,7 @@ export default function HomePage() {
       </span>
 
       <button
-        onClick={() => handlePagination('next')}
+        onClick={() => handlePagination("next")}
         disabled={currentPage === totalPages || loading}
         className="px-4 py-2 bg-gray-700 text-white rounded-md disabled:opacity-50 
           hover:bg-gray-600 transition-all hover:scale-105"
