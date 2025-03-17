@@ -17,19 +17,16 @@ export interface AnimeLoaderResult {
 }
 
 export async function homeLoader({ request }: { request: Request }): Promise<AnimeLoaderResult> { 
-  //ข้อมูลที่เข้ามาคือ request ที่เป็นอ็อบเจ็กต์ประเภท Request ซึ่งจะเป็น คำขอ (Request) ที่ส่งมา จากคลาวด์หรือหน้าเว็บที่ผู้ใช้เรียกดู 
-  // (เช่น หน้าเว็บที่โหลดข้อมูลจาก API) ซึ่งโดยปกติแล้วจะมีหลายข้อมูลภายใน:
-
-  const {searchParams} = new URL(request.url); //ทำการดึง URL ออกมา 
+  // ตัว request ที่ส่งเข้ามาใน homeLoader นี่คือ Request Object หรือบาง Framework ที่ใช้ Loader (เช่น React Router Loader)
+  // มันจะมี property request.url อยู่ ซึ่งจะเก็บ URL ของหน้าเว็บที่เรียกเข้ามา
+console.log(request)
+  const {searchParams} = new URL(request.url); //ทำการดึง URL ออกมา  url: "http://localhost:5173/"
   const page = searchParams.get('page') ? parseInt(searchParams.get('page')!) : 1  
-  // const page = 3 
-  // เพื่อหาว่าใน URL มีค่า page หรือไม่ถ้ามีดึงค่า page ออกมา ถ้าไม่มี ให้เป็น 1 เพื่อส่งให้ getAnimeSeasonNow(page)
-  
-
-  // ! (ที่เรียกว่า non-null assertion operator) 
-  // คือการบอก TypeScript ว่า เรามั่นใจว่า searchParams.get("page") 
-  // จะไม่เป็น null ในที่นี้เราใช้เพราะเราคิดว่า URL จะมีค่าพารามิเตอร์ page เสมอ ถ้าไม่มีเราจะใช้ค่าเริ่มต้นแทน
-
+ // อธิบาย tenary คล้ายกับ if else แต่เป็นแบบสั้น ๆ เช่น ถ้าเงื่อนไขเป็นจริงให้ทำอะไร ถ้าไม่ให้ทำอะไร
+ // เหตุผลที่ใช้แบบนี้คือ มีความยืดหยุ่น ถ้ามีการแชร์ลิ้งเเล้วสามารถโหลดหน้าที่ต้องการได้ทันที
+ // จาก parameter ไม่มีหน้าเพจจะมีค่าเริ่มต้นเป็น 1 ซึ่งจริง ๆ ไม่มีบรรทัดข้างบนก็ได้ แต่สามารถกำหนด const page = 1; ได้เลย
+ // ข้อแตกต่างคือ ถ้าใช้ Hardcode จะไม่ได้อ่านค่า qurey string ใน URL มาเลย จะโหลดหน้า 1 ตลอด ไม่ว่าค่า url มีค่า page อะไรก็ตาม
+ //  const page = 1
 
   const top = await getAnimeTop(); 
   const upcoming = await getAnimeSeasonUpcoming();

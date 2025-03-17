@@ -17,7 +17,7 @@ export default function HomePage() {
   } = useLoaderData() as AnimeLoaderResult;
 
   const [currentPage, setCurrentPage] = useState(pagination.current_page);
-  // ตัวแปรนี้จะถูกใช้ในการแสดงข้อมูลอนิเมะในหน้าๆ หนึ่งในหมวด Anime Season Now.
+  // ตัวแปรนี้จะถูกใช้ในการแสดงข้อมูลอนิเมะในหน้า AnimeSeasonNow.
   const [data, setData] = useState(initialData);
   // ถ้าใช้ now ตรง ๆ อาจสับสนว่าเป็นค่าคงที่ (const) หรือค่าที่อัปเดตได้ (useState)
   // now จาก useLoaderData() เป็นค่าตั้งต้นจากเซิร์ฟเวอร์.
@@ -26,6 +26,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   //บรรทัดนี้ตั้งค่าสถานะ loading เป็น true เพื่อระบุว่าการดำเนินการดึงข้อมูลกำลังจะเริ่มต้น ช่วยในการจัดการองค์ประกอบ UI เช่น การแสดงตัวหมุนโหลด
   const totalPages = pagination.last_visible_page;
+  //totalPages เอาไว้ใช้เป็น เงื่อนไข (Condition) ในการควบคุม "การเปลี่ยนหน้า" และ UI ของ Pagination
 
   const fetchDataForCurrentPage = async () => {
     try {
@@ -45,10 +46,14 @@ export default function HomePage() {
     setLoading(true);
     fetchDataForCurrentPage();
   }, [currentPage]);
+  // currentPage เป็นตัวแปล state ที่ใช้เก็บค่าหน้าปัจจุบัน เมื่อ currentPage เปลี่ยนแปลง, useEffect จะถูกเรียกใช้และอัพเดตข้อมูลใหม่ตามหน้าที่เปลี่ยน
+
 
   // Navigation handlers
   const handlePagination = (direction: "prev" | "next") => {
-    if (direction === "next" && currentPage < totalPages && data.length > 0) {
+    if (direction === "next" && currentPage < totalPages && data.length > 0) { 
+      //เช็คว่า ข้อมูลปัจจุบันมีอยู่จริงหมายถึง array ที่เก็บข้อมูลในหน้า currentPage นั้น ไม่ว่างเปล่า
+      //ป้องกันไม่ให้เกิดปัญหาเวลาเรา "กด next" แล้วมันไม่มีข้อมูลอะไรเลย
       setCurrentPage((prev) => prev + 1);
     } else if (direction === "prev" && currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
@@ -64,6 +69,10 @@ export default function HomePage() {
         autoPlayInterval={5000}
         items={top.map((item) => (
           <AnimeTopItem top={item} mode={1} key={item.mal_id} />
+          //ระบุ key เพื่อระบุ unique id สำหรับ list items
+          //ติดตาม (identify) ว่า component ตัวไหนควรเปลี่ยน, ตัวไหนควร เพิ่ม/ลบ เมื่อมีการอัปเดตข้อมูลใน list
+          //ถ้าไม่ใส่จะเกิดอะไรขึ้น React จะใช้ index ของ array เป็นค่าเริ่ม 
+          // ไม่ใส่ key ได้มั้ยคำตอบคือได้ เเต่ React จะไปใช้จาก index เเทนซึ่งอาจจะทำให้ React สับสนเเละเกิด bug  
         ))}
       />
     </div>
