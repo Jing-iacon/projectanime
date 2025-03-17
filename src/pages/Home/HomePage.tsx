@@ -46,7 +46,7 @@ export default function HomePage() {
     setLoading(true);
     fetchDataForCurrentPage();
   }, [currentPage]);
-  // currentPage เป็นตัวแปล state ที่ใช้เก็บค่าหน้าปัจจุบัน เมื่อ currentPage เปลี่ยนแปลง, useEffect จะถูกเรียกใช้และอัพเดตข้อมูลใหม่ตามหน้าที่เปลี่ยน
+  // currentPage เป็นตัวแปร state ที่ใช้เก็บค่าหน้าปัจจุบัน เมื่อ currentPage เปลี่ยนแปลง, useEffect จะถูกเรียกใช้และอัพเดตข้อมูลใหม่ตามหน้าที่เปลี่ยน
 
 
   // Navigation handlers
@@ -72,7 +72,7 @@ export default function HomePage() {
           //ระบุ key เพื่อระบุ unique id สำหรับ list items
           //ติดตาม (identify) ว่า component ตัวไหนควรเปลี่ยน, ตัวไหนควร เพิ่ม/ลบ เมื่อมีการอัปเดตข้อมูลใน list
           //ถ้าไม่ใส่จะเกิดอะไรขึ้น React จะใช้ index ของ array เป็นค่าเริ่ม 
-          // ไม่ใส่ key ได้มั้ยคำตอบคือได้ เเต่ React จะไปใช้จาก index เเทนซึ่งอาจจะทำให้ React สับสนเเละเกิด bug  
+          //ไม่ใส่ key ได้มั้ยคำตอบคือได้ เเต่ React จะไปใช้จาก index เเทนซึ่งอาจจะทำให้ React สับสนเเละเกิด bug  
         ))}
       />
     </div>

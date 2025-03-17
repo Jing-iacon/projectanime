@@ -16,11 +16,17 @@ const Carousel = ({
     const timer = setInterval(() => { //ใช้ setInterval เพื่อเรียกฟังก์ชันที่อยู่ข้างในซ้ำ ๆ ตามเวลาที่กำหนด (autoPlayInterval)
       setCurrentIndex((prevIndex) =>
         prevIndex === items.length - 1 ? 0 : prevIndex + 1
+        // item.length มีไว้เพื่อเช็คว่า index ของ item ใน array มีการลบหรือเพิ่มเข้าไปใหม่
+        
       );
     }, autoPlayInterval);
     // ล้าง timer เมื่อ component ถูก unmounted
     return () => clearInterval(timer);
-  }, [items.length, autoPlayInterval]);
+  }, [items.length, autoPlayInterval]); 
+  // ใส่ dependencies เพื่อให้ useEffect ตรวจจับการเปลี่ยนแปลงของ items.length และ autoPlayInterval แล้วรีเซ็ต setInterval ใหม่ เพื่อให้ Carousel ทำงานได้ถูกต้อง
+  // ถ้าไม่ใส่ items.length หรือ autoPlayInterval ใน dependencies
+  // React จะไม่รู้ว่าเมื่อไหร่ต้อง re-run useEffect และทำให้การตั้งค่าใหม่ไม่เกิดขึ้น เช่น 
+  // ถ้าเปลี่ยนแปลง items หรือ autoPlayInterval แต่ useEffect ไม่ได้รับการเรียกใหม่ก็อาจจะเห็นว่า Carousel เลื่อนสไลด์ไม่ถูกต้องหรือใช้เวลาผิด.
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>

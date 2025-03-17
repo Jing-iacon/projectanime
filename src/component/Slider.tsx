@@ -44,7 +44,7 @@ const Slider = ({
         pages.push(items.slice(i, i + currentItemsPerPage));
     }
     
-    const totalPages = pages.length;
+    const totalPages = pages.length; // เพื่อการควบคุมหน้าไม่ให้เกินจำนวน
 
     // Navigation functions
     const nextSlide = () => {
