@@ -18,7 +18,7 @@ const MyFavoritePage: React.FC = () => {
   
     updateFavorites(); // โหลดข้อมูลครั้งแรก
   
-    window.addEventListener("favoritesUpdated", updateFavorites);
+    window.addEventListener("favoritesUpdated", updateFavorites); 
     return () => {
     window.removeEventListener("favoritesUpdated", updateFavorites);
     };

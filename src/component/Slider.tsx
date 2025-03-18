@@ -42,7 +42,14 @@ const Slider = ({
     const pages = []; // ใช้แบ่ง items เป็นหน้าๆ
     for (let i = 0; i < items.length; i += currentItemsPerPage) {
         pages.push(items.slice(i, i + currentItemsPerPage));
-    }
+    } 
+    // ใช้ loop ในการ push เพราะว่าควบคุมง่าย ยืดหยุ่นกว่า สามารถมองเห็นการทำงานเเต่ละ loop ได้
+    // ทำไมไม่ใช้การหารแบ่งเพราะไม่ยืดหยุ่นพอในการทำ responsive กับ pagination เพราะในอนาคตเพื่อจะเพิ่มเงื่อนไขได้
+    // "ไม่ใช้หารแบ่ง เพราะในโค้ดมีการเปลี่ยน currentItemsPerPage 
+    // ตาม responsive → จำนวนหน้าไม่แน่นอน → ต้องใช้ for loop คุมเองให้ยืดหยุ่นและแม่นยำ"
+    // จำนวน items per page เปลี่ยนตลอด
+    // ไม่มี numberOfPages ชัดเจน
+
     
     const totalPages = pages.length; // เพื่อการควบคุมหน้าไม่ให้เกินจำนวน
 
@@ -76,7 +83,9 @@ const Slider = ({
                     transform: `translateX(-${currentPage * (100 / totalPages)}%)`,
                 }}
             >
-                {pages.map((page, pageIndex) => (
+                {pages.map((page, pageIndex) => ( 
+                    // เช่น pages = [[1,2,3,4,5],[6,7,8,9,10]] จำนวนหน้ามี 2 หน้า 
+
                     <div
                         key={pageIndex}
                         className="slider-page"
@@ -84,7 +93,7 @@ const Slider = ({
                             width: `${100 / totalPages}%`,
                         }}
                     >
-                        {page.map((item, index) => (
+                        {page.map((item, index) => ( //ในเเต่ละหน้ามี item 1-5, 6-10
                             <div 
                                 key={index} 
                                 className="slide-item"

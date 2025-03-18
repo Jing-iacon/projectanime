@@ -22,7 +22,7 @@ export async function searchLoader({
   const {searchParams} = urlObj
   // term=naruto&page=2
   const term = searchParams.get("term");
-  const page = searchParams.get("page");
+  const page = searchParams.get("page") ? parseInt(searchParams.get('page')!) : 1  ;
 
   // console.log("term & page: ", { term, page });
 
@@ -31,9 +31,9 @@ export async function searchLoader({
   }
 
   // ถ้าไม่มี page ส่งค่าเริ่มต้นเป็น 1
-  const pageNumber = page ? parseInt(page) : 1;
+  // const pageNumber = page ? parseInt(page) : 1;
 
-  const result: AnimeResult = await searchResult(term, pageNumber); // เปลี่ยนจากการส่งแค่ data เป็นการส่งทั้ง data และ pagination
+  const result: AnimeResult = await searchResult(term, page); // เปลี่ยนจากการส่งแค่ data เป็นการส่งทั้ง data และ pagination
   console.log(result);
 
   return {
