@@ -17,11 +17,8 @@ const MyFavoritePage: React.FC = () => {
     };
   
     updateFavorites(); // โหลดข้อมูลครั้งแรก
-  
-    window.addEventListener("favoritesUpdated", updateFavorites); 
-    return () => {
-    window.removeEventListener("favoritesUpdated", updateFavorites);
-    };
+    console.log(favoriteList);
+    
   }, []);
   
   //การใช้ window.dispatchEvent เป็นวิธีการหนึ่งในการ สื่อสารระหว่างคอมโพเนนต์โดยไม่ต้องใช้ prop หรือ state โดยตรง

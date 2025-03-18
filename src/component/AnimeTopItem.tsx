@@ -44,7 +44,7 @@ export default function AnimeTopItem({ top, mode = 1 }: TopProps) {
                 <p className="text-green-400 text-sm sm:text-base lg:text-lg font-semibold">
                   #{top.rank} Spotlight
                 </p>
-                <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold line-clamp-1">
+                <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold line-clamp-1 leading-normal sm:leading-normal md:leading-normal lg:leading-normal tracking-wide">
                   {top.title}
                 </h1>
               </div>

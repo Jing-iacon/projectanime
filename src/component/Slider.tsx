@@ -27,6 +27,8 @@ const Slider = ({
                 setCurrentItemsPerPage(3);
             } else if (width < 1024) {
                 setCurrentItemsPerPage(4);
+            } else if (width < 1450) {  // Add new breakpoint
+                setCurrentItemsPerPage(4);
             } else {
                 setCurrentItemsPerPage(defaultItemsPerPage);
             }
