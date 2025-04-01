@@ -12,11 +12,11 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [tailwindcss(),react()],
-    base: '/projectanime/',
+    base: '/',
   }
 
   if (command !== 'serve') {
-    config.base = '/react-vite-gh-pages/'
+    config.base = '/projectanime/'
   }
 
   return config

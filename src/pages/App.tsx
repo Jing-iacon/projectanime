@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+],{ basename: import.meta.env.DEV ? '/' : '/projectanime/' });
 
 // RouterProvider จะเป็นเหมือน Context system คือ มีการเเชร์ทั่วทั้ง App รวมถึง State ต่าง ๆ
 function App() {
